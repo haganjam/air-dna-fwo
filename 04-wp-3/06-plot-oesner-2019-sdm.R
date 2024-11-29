@@ -14,7 +14,7 @@ library(terra)
 ## set-up the spatial extent data for BE, NL, FR, L and DE (to clip the bioclim data)
 
 # load world map with country polygons
-world <- ne_countries(scale = "medium", returnclass = "sf")
+world <- ne_countries(scale = "large", returnclass = "sf")
 
 # filter the countries to include only Belgium, Germany, and France
 selected_countries <-
@@ -70,6 +70,7 @@ plot(s_pres)
 # plot the figure
 
 # might need to downscale this raster
+s_pres <- terra::aggregate(s_pres, fact = 4)
 
 # create a raster data.frame for plotting
 # convert to a tibble
@@ -111,6 +112,44 @@ main <-
         legend.text = element_text(colour = "black", size = 8),
         plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm"))
 main
+
+# extract the legend
+main_leg <- ggpubr::get_legend(main)
+
+# remove legend from the main plot
+main <- main + theme(legend.position = "none")
+
+inset <-
+  ggplot() +
+  geom_raster(data = plot_pred, 
+              mapping = aes(x = x, y = y, fill = prod)) +
+  geom_sf(data = st_geometry(european_territories), fill = NA, colour = "lightgrey") +
+  scale_fill_viridis_c(option = "E", end = 0.95, begin = 0.05) +
+  scale_x_continuous(limits = c(0.5, 7.5), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(48.5, 52.5), expand = c(0, 0)) +
+  xlab("Longitude (dd)") +
+  ylab("Latitude (dd)") +
+  theme(legend.position = "none",
+        panel.border = element_rect(fill = NA, colour = "red", size = 1),
+        panel.background = element_rect(fill = "white"),
+        axis.text = element_text(colour = "black", size = 7.5),
+        axis.title.x = element_text(vjust = -0.2, size = 7.5),
+        axis.title.y = element_text(vjust = 2, size = 7.5),
+        plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
+inset
+
+# load patchwork
+library(patchwork)
+
+# combine the main and the inset
+p1 <- (main | inset)
+
+# combine with the legend
+p2 <- (p1 / main_leg) + plot_layout(heights = c(1.5, 0.1))
+
+# export as a png file
+ggsave(filename = "04-wp-3/figures-tables/fig-1.tiff", p2,
+       width = 18, height = 10, units = "cm", dpi = 1000)
 
 
 
