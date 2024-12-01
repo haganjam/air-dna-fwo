@@ -63,17 +63,17 @@ p1 <-
   scale_color_manual(values = jungle_palette) +
   scale_y_continuous(limits = y_lims) +
   geom_hline(yintercept = 0, linetype = "dashed", colour = "lightgrey") +
-  ylab("Read count") +
+  ylab("Read abundance") +
   theme_minimal_bw() +
   theme(legend.position = "none",
         axis.text = element_blank(),
         axis.ticks = element_blank(),
         axis.title.x = element_text(size = 12),
-        axis.title.y = element_text(size = 12, hjust = 0.4))
+        axis.title.y = element_text(size = 12))
 plot(p1)
 
 # export the plot
-ggsave(filename = "01-explore/figures-tables/fig-1a.pdf", p1,
+ggsave(filename = "02-wp-1/figures-tables/fig-1a.pdf", p1,
        width = 7, height = 7, unit = "cm")
 
 # plot the treatment (upwind)
@@ -86,17 +86,17 @@ p2 <-
   scale_y_continuous(limits = y_lims, position = "right") +  # Move y-axis to the right
   scale_x_reverse() +  # Reverse the x-axis
   geom_hline(yintercept = 0, linetype = "dashed", colour = "lightgrey") +
-  ylab("Read count") +
+  ylab("Read abundance") +
   theme_minimal_bw() +
   theme(legend.position = "none",
         axis.text = element_blank(),
         axis.ticks = element_blank(),
         axis.title.x = element_text(size = 12),
-        axis.title.y = element_text(size = 12, hjust = 0.4))
+        axis.title.y = element_text(size = 12))
 plot(p2)
 
 # export these plots
-ggsave(filename = "01-explore/figures-tables/fig-1b.pdf", p2,
+ggsave(filename = "02-wp-1/figures-tables/fig-1b.pdf", p2,
        width = 7, height = 7, unit = "cm")
 
 

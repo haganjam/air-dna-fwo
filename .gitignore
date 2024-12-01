@@ -2,6 +2,14 @@
 .Rhistory
 .Rapp.history
 
+# Datasets
+*.csv
+*.zip
+*.tif
+*.tiff
+*.parquet
+*.pdf
+
 # Session Data files
 .RData
 .RDataTmp
@@ -47,13 +55,6 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
-
-# Datasets
-*.csv
-*.zip
-*.tif
-*.tiff
-*.parquet
 
 # DS_Store files
 .DS_Store

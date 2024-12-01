@@ -77,12 +77,8 @@ p1 <-
         plot.title = element_text(hjust = 0.5, size = 10))
 
 # export as a png file
-ggsave(filename = "02-wp-1-2/figures-tables/fig-3a.tiff", p1,
+ggsave(filename = "03-wp-2/figures-tables/fig-3a.tiff", p1,
        width = 11, height = 14, units = "cm", dpi = 1000)
-
-
-
-Species distribution model for the Eurasian Lynx (Lynx lynx) showing the probability of occurrence in Belgium based on occurrence records from France, Germany, Luxembourg and the Netherlands. This model indicates a reasonably high chance of presence in southern Belgium.
 
 
 
